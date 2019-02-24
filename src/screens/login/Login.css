@@ -1,0 +1,16 @@
+.cardStyle {
+	width: 400px;
+	margin: auto;
+}
+
+.dispNone {
+	display: none;
+}
+
+.dispBlock {
+	display: block;
+}
+
+.textColorRed {
+	color: red;
+}
