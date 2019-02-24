@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router";
-
 import SearchAppBar from './../../common/header/SearchAppBar';
-
 import { Card, CardContent } from "@material-ui/core";
 import { FormControl, InputLabel, Input, Button, FormHelperText } from "@material-ui/core";
 import { Typography, withStyles } from "@material-ui/core";
