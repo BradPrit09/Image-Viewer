@@ -1,116 +1,147 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, {Component} from 'react';
+import './SearchAppBar.css';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
-import { fade } from '@material-ui/core/styles/colorManipulator';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
-import './SearchAppBar.css';
+import Avatar from '@material-ui/core/Avatar';
+import IconButton from '@material-ui/core/IconButton';
+import MenuItem from '@material-ui/core/MenuItem';
+import Popover from '@material-ui/core/Popover';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
-  root: {
-	width: '100%',
-	marginBottom: '0.5rem'
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  darkBackGround:{
-    background: '#263238',
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  search: {
-    position: 'relative',
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: '#c0c0c0',
-    '&:hover': {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-    marginLeft: '4px',
-    marginRight: '4px',
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing.unit,
-      width: 'auto',
-    },
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 9,
-    color: '#263238',
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputRoot: {
-    color: 'inherit',
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 120,
-      '&:focus': {
-        width: 200,
-      },
-    },
-  },
-});
+	grow: {
+	  flexGrow: 1
+	},
+	search: {
+	  position: 'relative',
+	  borderRadius: '4px',
+	  backgroundColor: '#c0c0c0',
+	  marginLeft: 0,
+	  width: '300px',
+	},
+	searchIcon: {
+	  width: theme.spacing.unit * 4,
+	  height: '100%',
+	  position: 'absolute',
+	  pointerEvents: 'none',
+	  display: 'flex',
+	  alignItems: 'center',
+	  justifyContent: 'center',
+	  color:'#000000'
+	},
+	inputInput: {
+	  paddingTop: theme.spacing.unit,
+	  paddingRight: theme.spacing.unit,
+	  paddingBottom: theme.spacing.unit,
+	  paddingLeft: theme.spacing.unit * 4,
+	  transition: theme.transitions.create('width'),
+	  width: '100%',
+	  [theme.breakpoints.up('sm')]: {
+		width: 120,
+		'&:focus': {
+		  width: 200
+		}
+	  }
+	},
+	avatar: {
+	  width: 50,
+	  height: 50,
+	},
+	appHeader:{
+	  backgroundColor:'#263238'
+	},
+	hr:{
+	  height:'1.5px',
+	  backgroundColor:'#f2f2f2',
+	  marginLeft:'5px',
+	  marginRight:'5px'
+	}
+  })
 
-function SearchAppBar(props) {
-  const { classes, search } = props;
-  return (
-    <div className={classes.root} >
-      <AppBar position="static" className={classes.darkBackGround}>
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" color="inherit" noWrap>
-          Image Viewer
-          </Typography>
-		  {
-				search ?
-				<>
-					<div className={classes.grow} />
-					<div className={classes.search}>
-						<div className={classes.searchIcon}>
-						<SearchIcon />
-						</div>
-						<InputBase
-						placeholder="Search…"
-						classes={{
-							root: classes.inputRoot,
-							input: classes.inputInput,
-						}}
-						/>
-					</div>
-				</> :
-				<></>
-		  }
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class SearchAppBar extends Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      anchorEl: null,
+    };
+  }
+
+  render(){
+    const {classes,screen} = this.props;
+    return (<div>
+        <AppBar className={classes.appHeader}>
+          <Toolbar>
+            {(screen === "Login" || screen === "Home") && <span className="header-logo">Image Viewer</span>}
+            {(screen === "Profile") && <Link style={{ textDecoration: 'none', color: 'white' }} to="/home"><span className="header-logo">Image Viewer</span></Link>}
+            <div className={classes.grow}/>
+            {(screen === "Home") &&
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase onChange={(e)=>{this.props.searchHandler(e.target.value)}} placeholder="Search…" classes={{
+                    input: classes.inputInput
+                  }}/>
+              </div>
+            }
+            {(screen === "Home" || screen === "Profile")  &&
+              <div>
+                <IconButton onClick={this.handleClick}>
+                  <Avatar alt="Profile Pic" src={this.props.userProfileUrl} className={classes.avatar} style={{border: "1px solid #fff"}}/>
+                </IconButton>
+                <Popover
+                  id="simple-menu"
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleClose}
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                  }}>
+                    <div style={{padding:'5px'}}>
+                      { (screen === "Home") &&
+                        <div>
+                          <MenuItem onClick={this.handleAccount}>My Account</MenuItem>
+                          <div className={classes.hr}/>
+                        </div>
+                      }
+                      <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
+                    </div>
+                </Popover>
+              </div>
+            }
+          </Toolbar>
+        </AppBar>
+    </div>)
+  }
+
+  handleClick = (event) =>{
+    this.setState({
+      anchorEl: event.currentTarget
+    })
+  }
+
+  handleAccount = ()=>{
+    this.props.handleAccount();
+    this.handleClose();
+  }
+
+  handleLogout = ()=>{
+    this.props.handleLogout();
+    this.handleClose();
+  }
+
+  handleClose = () =>{
+    this.setState({ anchorEl: null });
+  }
 }
 
-SearchAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(SearchAppBar);
+export default withStyles(styles)(SearchAppBar)
