@@ -39,7 +39,7 @@ And of course Image-Viewer itself is open source with a [public repository](http
 
 ### Installation
 
-This project  requires [NPM](https://www.npmjs.com/get-npm)  v6.8.0 to run and we need [Node.js] LTS Version: 10.15.2(https://nodejs.org/en/download/) driver.
+This project  requires [NPM](https://www.npmjs.com/get-npm)  v6.8.0 to run and we need [Node.js] (https://nodejs.org/en/download/) LTS Version: 10.15.2 driver.
 
 
 
