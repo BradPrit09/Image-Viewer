@@ -29,7 +29,7 @@ You can also:
 
 Image-Viewer uses a number of open source projects to work properly:
 
-* [Visula Studio Code](https://code.visualstudio.com/download) or for development.
+* [Visula Studio Code](https://code.visualstudio.com/download)
 * [Npm](https://www.npmjs.com/get-npm)
 * [Git](https://git-scm.com/downloads)
 * [Node.js](https://nodejs.org/en/download/)
@@ -61,13 +61,20 @@ OR
  6.After Node.js is successfully installed on your system, type the following command in your Command Prompt: npm i -g create-react-app
     NPM installs create-react-app package globally on your machine so that you can create a React application at any valid path on your system.
  
- 7.In the Command Prompt, go to the path on your system where you want to create your application.Create your React application using the create-react-app package that you installed on your machine in the previous step. For this, you would type a command which mentions create-react-app followed by the name of your application.
+ 7.In the Command Prompt, go to the path on your system where you want to create your application.
+  Create your React application using the create-react-app package that you installed on your machine in the previous step. For this,      you would type a command which mentions create-react-app followed by the name of your application.
 
     For example, here, the name of your application is imageapp. Thus, the command can be written as follows:
       create-react-app imageapp
       
  8.This command will create a folder with the name that you mentioned inside your current path in the Command Prompt. This folder will consist of all the necessary configuration files that you need
-
+ 
+ 9. Go the application folder that you created on your current path inside the Command Prompt.
+   cd imageapp
+   
+ 10. Now you are ready to start a development server locally on your machine and run your application in development mode. For this, write the following command in your Command Prompt: npm start
+ 
+ 11.HOLA! Your default browser will open your application in http://localhost:3000/
 ```
 
 
