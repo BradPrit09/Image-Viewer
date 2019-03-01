@@ -14,6 +14,7 @@ class Routes extends Component {
 				<div className="main-container">
 					<Route exact path='/' render={(props) => <Login {...props} />} />
 					<Route exact path='/home' render={(props) => <Home apiClient={apiClient} {...props} />} />
+				        <Route exact path='/profile' render={(props) => <Profile {...props} />} />
 					
 				</div>
 			</Router>
