@@ -1,16 +1,15 @@
-.cardStyle {
-	width: 400px;
-	margin: auto;
-}
-
 .dispNone {
-	display: none;
+    display:none;
 }
 
 .dispBlock {
-	display: block;
+    display: block;
 }
 
-.textColorRed {
-	color: red;
+.red {
+    color: red;
+}
+.main-container{
+  display: flex;
+  flex-direction: column;
 }
